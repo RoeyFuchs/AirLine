@@ -2,30 +2,33 @@
 // Created by roey on 11/22/18.
 //
 
-#include "ID.h"
-#include "Employee.h"
-#include <list>
+
+#include "interface.h"
+#include "IDGen.cpp"
 
 #ifndef AIRLINE_FLIGHT_H
 #define AIRLINE_FLIGHT_H
 
 #endif //AIRLINE_FLIGHT_H
 
-class Flight : public ID {
+class MyFlight : public Flight {
     int modeNumber;
     std::list<Reservation*> reservations;
     std::list<Employee*> assignedCrew;
     Date date;
     std::string source;
     std::string destination;
+    std::string id;
+
 public:
-    Flight(std::string id, std::list<Reservation*>rev, std::list<Employee*> crew,
-            Date dateVal, std::string src, std::string des) : ID(id) {
+    MyFlight(std::list<Reservation*>rev, std::list<Employee*> crew,
+            Date dateVal, std::string src, std::string des) : date(dateVal){
     this->reservations = rev;
     this->assignedCrew = crew;
     this->date = dateVal;
     this->source = src;
     this->destination = des;
+        this->id = 'F' + std::to_string(genID());
 }
     virtual int getModelNumber() {
         return this->modeNumber;
@@ -44,6 +47,9 @@ public:
     }
     virtual std::string getDestination(){
         return this->destination;
+    }
+    virtual std::string getID() {
+        return this->id;
     }
 
 

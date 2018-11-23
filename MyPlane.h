@@ -4,26 +4,27 @@
 
 #ifndef AIRLINE_PLANE_H
 
-#include <map>
-#include "ID.h"
-#include "Employee.h"
+#include "interface.h"
+#include "IDGen.cpp"
 
 #define AIRLINE_PLANE_H
 
 #endif //AIRLINE_PLANE_H
 
-class Plane : public ID {
+class MyPlane : public Plane {
     int modelNumber;
     std::map<Jobs, int> crewNeeded;
     int maxFirstClass;
     int maxEconomyClass;
+    std::string id;
 
 public:
-    Plane(std::string id, int model, std::map<Jobs, int> crew, int maxFirst, int maxSecond) : ID(id) {
+    MyPlane(int model, std::map<Jobs, int> crew, int maxFirst, int maxSecond){
         this->modelNumber = model;
         this->crewNeeded = crew;
         this->maxFirstClass = maxFirst;
         this->maxEconomyClass = maxSecond;
+        this->id = 'P' + std::to_string(genID());
 
     }
     virtual int getModelNumber(){
@@ -38,6 +39,9 @@ public:
     virtual int getMaxEconomyClass(){
         return this->maxEconomyClass;
     };
+    virtual std::string getID() {
+        return this->id;
+    }
 };
 
 

@@ -4,22 +4,25 @@
 
 #ifndef AIRLINE_EMPLOYEE_H
 
-#include "ID.h"
+#include "interface.h"
+#include "IDGen.cpp"
 #define AIRLINE_EMPLOYEE_H
+#define DATA_BASE_EMPLOYEE "employee.txt"
 
-enum Jobs {MANAGER, NAVIGATOR, FLY_ATTENDANT, PILOT, OTHER};
-class Employee : public ID {
+class MyEmployee : public Employee {
     int seniority;
     int birthYear;
     Employee* employer;
     Jobs title;
+    std::string id;
 
 public:
-    Employee(std::string id, int sen, int year, Employee* empr, Jobs tit) : ID(id) {
+    MyEmployee(int sen, int year, Employee* empr, Jobs tit){
         this->seniority = sen;
         this->birthYear = year;
         this->employer = empr;
         this->title = tit;
+        this->id = 'E' + std::to_string(genID());
     }
     virtual int getSeniority() {
         return this->seniority;
@@ -32,6 +35,13 @@ public:
     }
     virtual Jobs getTitle() {
         return this->title;
+    }
+    virtual std::string getID() {
+        return this->id;
+    }
+    virtual void save() {
+        ofstream out(DATA_BASE_EMPLOYEE, ios::app);
+        out<<this->id<<","<<this->title<<","<<this->birthYear<<","<<this->seniority<<","<<this->employer->getID()<<endl;
     }
 };
 

@@ -3,4 +3,4 @@ project(AirLine)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(AirLine main.cpp Employee.cpp Employee.h ID.cpp ID.h IDGen.h Plane.h Flight.h Customer.h Reservation.h)
+add_executable(AirLine main.cpp MyEmployee.h MyPlane.h MyFlight.h MyCustomer.h Date.cpp Date.h interface.h MyReservation.h IDGen.cpp MyImplementation.h MyImplementation.cpp DataBase.cpp DataBase.h)

@@ -1,28 +1,27 @@
 //
-// Created by roey on 11/22/18.
+// Created by roey on 11/23/18.
 //
 
-#include "ID.h"
-enum Classes {FIRST_CLASS, SECOND_CLASS};
-#include "Customer.h"
-#include "Flight.h"
-
 #ifndef AIRLINE_RESERVATION_H
+
+#include "IDGen.cpp"
+
+#include "interface.h"
 #define AIRLINE_RESERVATION_H
 
-#endif //AIRLINE_RESERVATION_H
-
-class Reservation : public ID {
+class MyReservation : public Reservation {
     Customer* customer;
     Flight* flight;
     Classes classChoice;
     int maxBaggage;
+    std::string id;
 
-    Reservation(std::string id, Customer* cus, Flight* fly, Classes choice, int max) : ID(id) {
+    MyReservation(Customer* cus, Flight* fly, Classes choice, int max){
         this->customer = cus;
         this->flight = fly;
         this->classChoice = choice;
         this->maxBaggage = max;
+        this->id = 'R' + std::to_string(genID());
     }
 
     virtual Customer* getCustomer() {
@@ -38,5 +37,11 @@ class Reservation : public ID {
         return this->maxBaggage;
     }
 
+    virtual std::string getID() {
+        return this->id;
+    }
+
 
 };
+
+#endif //AIRLINE_RESERVATION_H

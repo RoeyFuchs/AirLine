@@ -1,8 +1,9 @@
 #include <iostream>
-#include "IDGen.h"
+#include "IDGen.cpp"
+
 
 int main() {
-    IDGen io = IDGen();
-    std::cout  << io.getNew() <<std::endl<< io.getNew() <<std::endl<< io.getNew() <<std::endl<< io.getNew() <<std::endl;
+
+    std::cout << genID() <<std::endl;
     return 0;
 }
